@@ -2,6 +2,7 @@
 import os
 import requests
 from datetime import datetime
+import pytz
 from typing import Optional
 
 API_KEY = os.getenv("JSONBIN_API_KEY")
@@ -32,10 +33,9 @@ def _save_record(record: dict) -> bool:
         return False
 
 def log_entry(query: str, response: str, route: Optional[str]=None, timestamp: Optional[str]=None, user_ip: Optional[str]=None, score: Optional[float]=None):
-
     """
     Appends a log entry containing:
-      - timestamp (ISO UTC if not provided)
+      - timestamp (in Indian Standard Time if not provided)
       - route (faq/sql/other)
       - query (truncated)
       - response (truncated)
@@ -46,7 +46,12 @@ def log_entry(query: str, response: str, route: Optional[str]=None, timestamp: O
         record = _fetch_record()
         logs = record.get("logs", [])
 
-        ts = timestamp or (datetime.utcnow().isoformat() + "Z")
+        # ✅ Generate IST timestamp if none provided
+        if timestamp:
+            ts = timestamp
+        else:
+            ist = pytz.timezone('Asia/Kolkata')
+            ts = datetime.now(ist).strftime("%Y-%m-%d %I:%M:%S %p IST")
 
         entry = {
             "timestamp": ts,
@@ -54,6 +59,7 @@ def log_entry(query: str, response: str, route: Optional[str]=None, timestamp: O
             "query": (query[:2000] if query else ""),
             "response": (response[:4000] if response else ""),
         }
+
         if user_ip:
             entry["ip"] = user_ip
 
@@ -66,5 +72,6 @@ def log_entry(query: str, response: str, route: Optional[str]=None, timestamp: O
         success = _save_record(record)
         if not success:
             print("log_store: failed to save log")
+
     except Exception as e:
         print("log_store.log_entry error:", e)
