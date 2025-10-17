@@ -104,7 +104,7 @@ st.markdown(
 st.markdown(
     """
     <p style='text-align: center; font-size: 14px; color: gray;'>
-    <b>(queries are limited.expand the left panel for details)</b>.
+    <b>(queries are limited.expand the left panel from top arrows for details)</b>.
     </p>
     """,
     unsafe_allow_html=True
