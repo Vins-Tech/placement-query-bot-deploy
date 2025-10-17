@@ -76,12 +76,10 @@ def ask(query):
 
     # log the query + response + route + timestamp (best-effort, non-blocking)
     try:
-        ts = datetime.utcnow().isoformat() + "Z"
         log_entry(
             query=query,
             response=response_text,
             route=route_name,
-            timestamp=ts,
             score=route_score,  # ✅ add similarity score
         )
     except Exception as e:

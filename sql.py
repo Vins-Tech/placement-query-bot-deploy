@@ -97,6 +97,7 @@ Guidelines:
 4. If only some columns are present in the DATA, include only those available (do not invent missing details). 
 5. Numbers should be expressed with proper units: "students" for counts, "LPA" for salary, and mention year if it exists in the row. 
 6. Always be natural and concise. Do not repeat the question, only answer it directly in a way that makes sense to a student or recruiter reading it.
+
 """
 
 
@@ -156,13 +157,13 @@ def sql_chain(question):
     matches = re.findall(pattern, sql_query, re.DOTALL)
 
     if len(matches) == 0:
-        return "Sorry, LLM is not able to generate a query for your question"
+        return "Sorry, bot is not able to answer your question (query problem) . come back later or contact us through mail in left panel"
 
     #print(matches[0].strip())
 
     response = run_query(matches[0].strip())
     if response is None:
-        return "Sorry, there was a problem executing SQL query"
+        return "Sorry, there was a problem executing probelm. come back later or contact us through mail in left panel"
 
     context = response.to_dict(orient='records')
 

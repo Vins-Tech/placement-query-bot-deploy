@@ -96,6 +96,7 @@ def generate_answer(query: str):
 Use the retrieved context to answer the question clearly and professionally (pointwise is preferred). 
 Do not mention the word 'context' or copy text directly. 
 If the answer is not found, say you don't know.
+if the questions are not related to placements, then say "I'm designed to answer queries about placements and related details. "
 
 Question: {input}
 
