@@ -34,8 +34,16 @@ if "initialized" not in st.session_state:
 # -------------------------------
 # Load query count once per session
 # -------------------------------
-if "query_count" not in st.session_state:
+from datetime import date
+from query_store import get_data, get_query_count
+
+# Always ensure count is fresh per calendar day
+data = get_data()
+today = str(date.today())
+
+if "last_reset" not in st.session_state or st.session_state.get("last_reset") != today:
     st.session_state["query_count"] = get_query_count()
+    st.session_state["last_reset"] = today
 
 # -------------------------------
 # Ask function
