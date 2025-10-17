@@ -38,19 +38,22 @@ def save_data(data):
         return False
 
 def get_query_count():
-    """Return the current query count (resets if new day)."""
+    """Return the current query count (resets if a new day)."""
     data = get_data()
     today = str(date.today())
+    last_reset = data.get("last_reset")
 
-    # ✅ Reset only if the date is older (and count not already 0)
-    if data.get("last_reset") != today and data.get("query_count", 0) != 0:
-        print("🕛 New day detected, resetting query count.")
+    print(f"🕒 Today: {today} | Last reset: {last_reset}")
+
+    # Force reset if day changed OR if JSON is malformed
+    if not last_reset or last_reset != today:
+        print("🔄 New day detected — resetting query count to 0.")
         data = {"query_count": 0, "last_reset": today}
         save_data(data)
-    else:
-        print("✅ Using existing count:", data.get("query_count"))
+        return 0
 
     return data.get("query_count", 0)
+
 
 
 
