@@ -98,7 +98,7 @@ def ask(query):
 # -------------------------------
 # Header and Branding
 # -------------------------------
-st.markdown("<h1 style='text-align: center;'>Welcome to BNMIT Placement Bot</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Welcome to BNMIT Placement department Bot</h1>", unsafe_allow_html=True)
 st.markdown(
     """
     <p style='text-align: center; font-size: 14px; color: gray;'>
