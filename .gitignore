@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 *.pkl
 README.md
+*.bin
+*.sqlite3

@@ -38,12 +38,16 @@ def get_query_count():
     """Return the current query count (resets if a new day)."""
     data = get_data()
     today = str(date.today())
-
+    
     if data.get("last_reset") != today:
+        # reset data and save
         data = {"query_count": 0, "last_reset": today}
         save_data(data)
+        return 0  # ✅ return reset value immediately
 
+    # ✅ normal case
     return data.get("query_count", 0)
+
 
 def update_query_count(new_count):
     """Increment and save updated count."""
