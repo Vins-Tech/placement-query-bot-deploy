@@ -15,15 +15,18 @@ def get_data():
     """Fetch the full JSON record from JSONBin."""
     try:
         res = requests.get(f"{BASE_URL}/latest", headers=HEADERS)
+        print("📡 Status code:", res.status_code)
+        print("📡 Response:", res.text[:200])
         if res.status_code == 200:
             record = res.json().get("record", {})
             if isinstance(record, dict):
                 return record
         print("⚠️ Unexpected response:", res.text)
     except Exception as e:
-        print("Error fetching data:", e)
+        print("🚨 Error fetching data:", e)
     # fallback
     return {"query_count": 0, "last_reset": str(date.today())}
+
 
 def save_data(data):
     """Update JSONBin with new data."""
@@ -35,18 +38,20 @@ def save_data(data):
         return False
 
 def get_query_count():
-    """Return the current query count (resets if a new day)."""
+    """Return the current query count (resets if new day)."""
     data = get_data()
     today = str(date.today())
-    
-    if data.get("last_reset") != today:
-        # reset data and save
+
+    # ✅ Reset only if the date is older (and count not already 0)
+    if data.get("last_reset") != today and data.get("query_count", 0) != 0:
+        print("🕛 New day detected, resetting query count.")
         data = {"query_count": 0, "last_reset": today}
         save_data(data)
-        return 0  # ✅ return reset value immediately
+    else:
+        print("✅ Using existing count:", data.get("query_count"))
 
-    # ✅ normal case
     return data.get("query_count", 0)
+
 
 
 def update_query_count(new_count):
