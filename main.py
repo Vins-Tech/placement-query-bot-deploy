@@ -154,7 +154,11 @@ It is not an official BNMIT bot, and some information may be outdated or inaccur
 - Using free APIs, so the daily query limit is {MAX_QUERIES} (shared across users)
 """)
 
+import datetime
 st.sidebar.markdown("---")
+st.sidebar.write("🕒 Server time:", datetime.datetime.now())
+st.sidebar.markdown("---")
+
 st.sidebar.markdown("""
 👨‍💻 **Contact:** Vinay S  
 📧 [vins.techn@gmail.com](mailto:vins.techn@gmail.com)
