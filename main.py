@@ -27,7 +27,7 @@ MAX_QUERIES = 25  # shared daily limit
 # -------------------------------
 
 
-@st.cache_resource(show_spinner=False)
+# @st.cache_resource(show_spinner=False)
 def init_vector_store():
     BASE_DIR = Path(__file__).parent
     folder = BASE_DIR / "resources/placement_texts"
@@ -46,7 +46,7 @@ if "initialized" not in st.session_state:
 # -------------------------------
 # Cached logo loading
 # -------------------------------
-@st.cache_data
+# @st.cache_data
 def load_logo_base64():
     logo_path = Path(__file__).parent / "resources/bnmit_logo.png"
     logo = Image.open(logo_path)
