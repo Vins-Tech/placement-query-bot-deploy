@@ -155,7 +155,6 @@ It is not an official BNMIT bot, and some information may be outdated or inaccur
 - Using free APIs, daily limit = {MAX_QUERIES} (shared)
 """)
 st.sidebar.markdown("---")
-st.markdown(str(date.today()))
 st.sidebar.markdown("""
 👨‍💻 **Contact:** Vinay S  
 📧 [vins.techn@gmail.com](mailto:vins.techn@gmail.com)
