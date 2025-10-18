@@ -6,7 +6,7 @@ from router import router
 from PIL import Image
 import base64
 from datetime import date
-from query_store import get_query_count, update_query_count, get_data
+from query_store import get_query_count, update_query_count, get_data,save_data
 from log_store import log_entry
 import contextlib
 import os
