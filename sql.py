@@ -97,6 +97,7 @@ Guidelines:
 4. If only some columns are present in the DATA, include only those available (do not invent missing details). 
 5. Numbers should be expressed with proper units: "students" for counts, "LPA" for salary, and mention year if it exists in the row. 
 6. Always be natural and concise. Do not repeat the question, only answer it directly in a way that makes sense to a student or recruiter reading it.
+7 if the floating number is huge round it of to two decimal plcaes.
 
 """
 
