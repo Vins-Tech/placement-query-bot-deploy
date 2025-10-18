@@ -9,14 +9,10 @@ from datetime import date
 from query_store import get_query_count, update_query_count, get_data
 from log_store import log_entry
 import contextlib
-
-
 import os
-st.sidebar.markdown("---")
-st.sidebar.markdown("### 🔍 DEBUG INFO")
-st.sidebar.write("BIN ID:", os.getenv("JSONBIN_BIN_ID"))
-st.sidebar.write("API Key Present:", bool(os.getenv("JSONBIN_API_KEY")))
-st.sidebar.write("Log BIN ID:", os.getenv("LOG_BIN_ID"))
+
+from dotenv import load_dotenv
+load_dotenv()
 
 # -------------------------------
 # App setup
