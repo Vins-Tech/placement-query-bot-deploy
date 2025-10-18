@@ -48,6 +48,7 @@ Important interpretation rules (use these to decide which SQL to generate):
 8. Use SQLite-compatible SQL. Return a single query only. Use aggregation functions (SUM, AVG) and CASE WHEN for safety as needed.
 9. When the question asks for the highest, top, or maximum salary/package for a particular branch (e.g., "highest package for CSE"), include only rows where that branch column > 0, since a 0 indicates no placements for that branch. 
 Also, when sorting for the highest or lowest salary, use ORDER BY "Salary LPA" DESC (or ASC) and LIMIT 1.
+10. note that when brnach columns like cse,ise vallue is represents the no of students from that particular branch placed for particular company if 0 no students placed.
 
 
 
