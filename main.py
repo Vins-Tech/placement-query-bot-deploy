@@ -27,6 +27,7 @@ MAX_QUERIES = 25  # shared daily limit
 # -------------------------------
 # Cached initialization
 # -------------------------------
+@st.cache_resource(show_spinner=False)  # ✅ disable Streamlit's own spinner text
 def init_vector_store():
     BASE_DIR = Path(__file__).parent
     folder = BASE_DIR / "resources/placement_texts"
@@ -34,13 +35,16 @@ def init_vector_store():
         _ = list(process_folder(folder, reset=False))
     return True
 
+# ✅ Only this spinner will appear
 if "initialized" not in st.session_state:
-    with st.spinner("Setting up resources..."):
+    with st.spinner("Setting up placement resources..."):
         st.session_state["initialized"] = init_vector_store()
+
 
 # -------------------------------
 # Cached logo loading
 # -------------------------------
+@st.cache_data(show_spinner=False)  # also no extra spinner
 def load_logo_base64():
     logo_path = Path(__file__).parent / "resources/bnmit_logo.png"
     logo = Image.open(logo_path)
@@ -176,6 +180,8 @@ if len(st.session_state["messages"]) == 0:
 
 query = st.chat_input("Ask anything about placements...")
 
+
+
 for message in st.session_state.messages:
     with st.chat_message(message['role']):
         st.markdown(message['content'])
@@ -187,6 +193,9 @@ if query:
 
     with st.spinner("🤖 Thinking..."):
         response = ask(query)
+        if not response.strip().isascii():
+            response = "⚠️ Something went wrong while generating a response. Please try again."
+
 
     with st.chat_message("assistant"):
         st.markdown(response)
