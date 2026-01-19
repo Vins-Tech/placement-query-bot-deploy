@@ -7,7 +7,7 @@ an AI-powered bot that answers placement-related questions using the logic from 
 
 ### 🌐 Live Demo
 🟢 Try it here:  
-[app](https://placement-query-bot-deploy-mhzuaomjatq3jiryatemjp.streamlit.app/)
+[app](https://vins-tech-placement-query-bot.streamlit.app/)
 
 ---
 
